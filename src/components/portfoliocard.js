@@ -3,7 +3,7 @@ const Image = require('./image')
 
 const PortfolioCard = (props) => {
   return (
-    <div className="fl w-25 tc pa1">
+    <div className="fl w-25 h-50 tc pa1">
       <article className="grow mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
           <div className="tc">
             <a href={props.info.href} >

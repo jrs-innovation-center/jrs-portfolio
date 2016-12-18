@@ -1,14 +1,14 @@
 const React = require('react')
+const fetch = require('isomorphic-fetch')
 const Nav = require('./components/nav')
-const About = require('./components/about2')
+const About = require('./components/aboutme')
 const Portfolio = require('./components/portfolio')
 const JRS = require('./components/jrs')
 const Skills = require('./components/skills')
-const fetch = require('isomorphic-fetch')
 const Loading = require('./components/loading')
+const Footer = require('./components/footer')
 
 //const url = '/db.json'
-
 const url = 'http://server.pouchcloud.com/jrs-portfolio/ee739a56-6b05-487f-a4e3-6be24043d334'
 
 const App = React.createClass({
@@ -34,7 +34,8 @@ const App = React.createClass({
           <About info={this.state.about}/>
           <JRS articles={this.state.articles}/>
           <Portfolio portfolio={this.state.portfolio}/>
-          <Skills skills={this.state.techSkills}/>
+          <Skills skills={this.state.skills}/>
+          <Footer/>
       </div>
     )
   }

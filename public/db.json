@@ -1,78 +1,182 @@
 {
-    "dataLoadingState" : "Loaded",
-    "about": {
-        "img": "tom1.jpg",
-        "name": "Jack Russell",
-        "location": "Charleston, SC",
-        "desc": "A burgeoning full-stack JavaScript developer."
+  "_id": "ee739a56-6b05-487f-a4e3-6be24043d334",
+  "_rev": "11-11ee427cdddbe29329a16fdf8f3055c6",
+  "dataLoadingState": "Loaded",
+  "about": {
+    "img": "tom1.jpg",
+    "name": "Jack Russell",
+    "location": "Charleston, SC",
+    "desc": "A burgeoning full-stack JavaScript developer."
+  },
+  "articles": [
+    {
+      "name": "Innovation Center",
+      "desc": "Providing technology leadership, creativity and training to TRHC and the healthcare community.",
+      "author": "Tom Wilson",
+      "img": "JRS-Innovation-Center-logo-green-dog-trhc-revised.png",
+      "href": "http://www.jackrussellsoftware.com/"
     },
-
-    "techSkills": [{
-        "href": "https://facebook.github.io/react/",
-        "category": "UI",
-        "name": "ReactJS"
-    }, {
-        "href": "http://tachyons.io/",
-        "category": "UI",
-        "name": "Tachyons"
-    }, {
-        "href": "https://nodejs.org/",
-        "category": "JS",
-        "name": "NodeJS"
-    }, {
-        "href": "http://ramdajs.com/",
-        "category": "JS",
-        "name": "Ramda"
-    }, {
-        "href": "https://pouchdb.com/",
-        "category": "DB",
-        "name": "PouchDB"
-    }, {
-        "href": "http://couchdb.apache.org/",
-        "category": "DB",
-        "name": "CouchDB"
-    }],
-
-    "articles": [{
-        "name": "Innovation Center",
-        "desc": "Providing technology leadership, creativity and training to TRHC and the healthcare community.",
-        "author": "Tom Wilson",
-        "img": "JRS-Innovation-Center-logo-green-dog-trhc-revised.png",
-        "href": "http://www.jackrussellsoftware.com/"
-    }, {
-        "name": "Coding School",
-        "desc": "Upon graduating from this 12-week immersive Coding School Boot Camp, successful students will be proficient at a junior professional level and able to build full-stack web applications using JavaScript. Our next course begins January 23, 2017. The application deadline for this course is January 8, 2017.",
-        "author": "Tom Wilson",
-        "img": "tom1.jpg",
-        "href": "http://www.jackrussellsoftware.com/coding_school/"
-    }, {
-        "name": "Life at JRS Coding School",
-        "desc": "Cameron Monaghan was looking for something. He had just graduated from the College of Charleston, with a Computing in the Arts degree. Now, he needed a next step.",
-        "author": "Tom Wilson",
-        "img": "cameron-coding.png",
-        "href": "http://www.jackrussellsoftware.com/category/life-at-jrs-coding-school/"
-    }],
-
-    "portfolio": [{
-        "name": "JS",
-        "desc": "A project based on functional JavaScript.",
-        "img": "js.png",
-        "href": "#"
-    }, {
-        "name": "Node",
-        "desc": "A server-side app using NodeJS.",
-        "img": "nodejs_logo2.png",
-        "href": "#"
-    }, {
-        "name": "CouchDB",
-        "desc": "Relax. This is a project where the data is stored in Couch.",
-        "img": "couchdb.png",
-        "href": "#"
-    }, {
-        "name": "React",
-        "desc": "A component based UI framework project.",
-        "img": "react-logo-1.png",
-        "href": "#"
-    }]
-
+    {
+      "name": "Coding School",
+      "desc": "Upon graduating from this 12-week immersive Coding School Boot Camp, successful students will be proficient at a junior professional level and able to build full-stack web applications using JavaScript. Our next course begins January 23, 2017. The application deadline for this course is January 8, 2017.",
+      "author": "Tom Wilson",
+      "img": "tom1.jpg",
+      "href": "http://www.jackrussellsoftware.com/coding_school/"
+    },
+    {
+      "name": "Life at JRS Coding School",
+      "desc": "Cameron Monaghan was looking for something. He had just graduated from the College of Charleston, with a Computing in the Arts degree. Now, he needed a next step.",
+      "author": "Tom Wilson",
+      "img": "cameron-coding.png",
+      "href": "http://www.jackrussellsoftware.com/category/life-at-jrs-coding-school/"
+    }
+  ],
+  "portfolio": [
+    {
+      "name": "JS",
+      "desc": "A project based on functional JavaScript.",
+      "img": "js.png",
+      "href": "#"
+    },
+    {
+      "name": "Node",
+      "desc": "A server-side app using NodeJS.",
+      "img": "nodejs_logo2.png",
+      "href": "#"
+    },
+    {
+      "name": "CouchDB",
+      "desc": "Relax. This is a project where the data is stored in Couch.",
+      "img": "couchdb.png",
+      "href": "#"
+    },
+    {
+      "name": "React",
+      "desc": "A component based UI framework project.",
+      "img": "react-logo-1.png",
+      "href": "#"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Functional JS",
+      "desc": "JavaScript treats functions as first-class objects.",
+      "img": "javascript_functional.png",
+      "href": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+    },
+    {
+      "name": "Node",
+      "desc": "Node.js uses an event-driven, non-blocking I/O model. Node.js' ecosystem, npm, is the largest in the world.",
+      "img": "nodejs_logo2.png",
+      "href": "https://nodejs.org/"
+    },
+    {
+      "name": "Ramda",
+      "desc": "Ramda emphasizes a purer functional style. Immutability and side-effect free functions are at the heart of its design philosophy.",
+      "img": "ramda.png",
+      "href": "http://ramdajs.com/"
+    },
+    {
+      "name": "npm",
+      "desc": "npm is the package manager.",
+      "img": "npm.jpg",
+      "href": "https://www.npmjs.com/"
+    },
+    {
+      "name": "CouchDB",
+      "desc": "Relax. Apache CouchDB is one of a new breed of database management system.",
+      "img": "couchdb.png",
+      "href": "http://couchdb.apache.org/"
+    },
+    {
+      "name": "PouchDB",
+      "desc": "PouchDB is an in-browser database that allows applications to save data locally.",
+      "img": "pouchdb.png",
+      "href": "https://pouchdb.com/"
+    },
+    {
+      "name": "Cloudant",
+      "desc": "Fully-managed NoSQL database-as-a-service.",
+      "img": "cloudant.png",
+      "href": "https://cloudant.com/"
+    },
+    {
+      "name": "MySQL",
+      "desc": "The world's most popular open source database.",
+      "img": "mysql.png",
+      "href": "https://www.mysql.com/"
+    },
+    {
+      "name": "React",
+      "desc": "React is a declarative, efficient, and flexible JavaScript library for building user interfaces.",
+      "img": "react-logo-1.png",
+      "href": "https://facebook.github.io/react/"
+    },
+    {
+      "name": "Redux",
+      "desc": "Redux is a predictable state container for JavaScript apps.",
+      "img": "redux.png",
+      "href": "https://github.com/reactjs/redux"
+    },
+    {
+      "name": "Git",
+      "desc": "Git is a free and open source distributed version control system",
+      "img": "git.png",
+      "href": "https://git-scm.com/"
+    },
+    {
+      "name": "GitHub",
+      "desc": "How people build software.",
+      "img": "github.png",
+      "href": "https://github.com/"
+    },
+    {
+      "name": "Atom",
+      "desc": "Hackable text editor from GitHub.",
+      "img": "atom.png",
+      "href": "https://atom.io/"
+    },
+    {
+      "name": "ExpressJS",
+      "desc": "Web development framework for node.js",
+      "img": "express_js.png",
+      "href": "http://expressjs.com/"
+    },
+    {
+      "name": "Postman",
+      "desc": "Build better APIs, faster, with Postman.",
+      "img": "postman.png",
+      "href": "https://www.getpostman.com/"
+    },
+    {
+      "name": "Now",
+      "desc": "Cloud deployment made simple, global and realtime.",
+      "img": "black-bg-logo-1200.png",
+      "href": "https://zeit.co/"
+    },
+    {
+      "name": "Surge",
+      "desc": "Static web publishing for Front-End Developers",
+      "img": "surge-logo.svg",
+      "href": "https://surge.sh/"
+    },
+    {
+      "name": "Tachyons",
+      "desc": "Create fast loading, highly readable, and 100% responsive interfaces with as little css as possible.",
+      "img": "tachyons.jpeg",
+      "href": "http://tachyons.io/"
+    },
+    {
+      "name": "Bootstrap",
+      "desc": "Mobile first front-end framework for faster and easier web development.",
+      "img": "bootstrap.jpg",
+      "href": "http://getbootstrap.com/"
+    },
+    {
+      "name": "React Bootstrap",
+      "desc": "The most popular front-end framework, rebuilt for React.",
+      "img": "reactbootstrap.png",
+      "href": "https://react-bootstrap.github.io/"
+    }
+  ]
 }
