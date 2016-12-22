@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom')
 const {BrowserRouter, Match, Miss} = require('react-router')
 const Home = require('./components/home')
 const AboutEdit = require('./components/aboutedit')
+const ArticleEdit = require('./components/articleedit')
 const NotFound = require('./components/not-found')
 const fetch = require('isomorphic-fetch')
 const PouchDB = require('pouchdb')
@@ -66,21 +67,32 @@ const Root = React.createClass({
         const profileData = {...this.state.profileData}
         profileData.about = updatedAboutData
         this.setState({ profileData })
-        //console.log("index.js updateAboutData", profileData.about)
     },
+
+    updateArticleData(index, updatedArticleData){
+        console.log("index.js article index", index)
+        console.log("index.js updatedArticleData", updatedArticleData)
+        const profileData = {...this.state.profileData}
+        profileData.articles[index] = updatedArticleData
+        this.setState({ profileData })
+    },
+
+
 
     render() {
       return (
         <BrowserRouter>
           <div>
             <Match exactly pattern="/"
-                render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
+              render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
             <Match exactly pattern="/aboutedit"
-                    render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
-                <Miss component={NotFound}/>
+              render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
+            <Match exactly pattern="/articleedit/:id"
+              render={(props) => <ArticleEdit {...props} updateArticleData={this.updateArticleData} saveData={this.saveData} profileData={this.state.profileData}/>} />
+            <Miss component={NotFound}/>
           </div>
         </BrowserRouter>
-      )
+    )
     }
 
 })

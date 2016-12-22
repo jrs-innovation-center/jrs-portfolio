@@ -8,7 +8,7 @@ const Loading = require('./loading')
 const Footer = require('./footer')
 
 const Home = React.createClass({
-    
+
     render() {
         const profileData = this.props.profileData
         const dataLoadingState = this.props.dataLoadingState
@@ -27,9 +27,6 @@ const Home = React.createClass({
             </div>
         )
     }
-
 })
-
-//
 
 module.exports = Home

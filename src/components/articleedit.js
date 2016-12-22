@@ -2,25 +2,29 @@ const React = require('react')
 const { Redirect, Link } = require('react-router')
 const { set, lensProp, pathOr } = require('ramda')
 
-const AboutEdit = React.createClass({
+const ArticleEdit = React.createClass({
   getInitialState() {
     return {
       resolved: false
     }
   },
-
+ //profileData
+ //{this.props.params.id}
   handleChange(field) {
     return e => {
-      this.props.updateAboutData(set(lensProp(field),e.target.value,this.props.profileData.about));
+      this.props.updateArticleData(set(lensProp(field),e.target.value,this.props.profileData.articles[this.props.params.id]));
     }
   },
 
   handleFileChange(e) {
+
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      this.props.updateAboutData(set(lensProp('imgFile'),reader.result,this.props.profileData.about));
+      console.log("this.props.params.id", this.props.params.id)
+      this.props.updateArticleData(this.props.params.id, set(lensProp('imgFile'),reader.result,this.props.profileData.articles[this.props.params.id]));
     }, false)
-    console.log("handleFileChange e", e)
+    console.log("handleFileChange e.target.files", e.target.files)
+
     if (e.target.files[0]) {
         reader.readAsDataURL(e.target.files[0])
     }
@@ -39,8 +43,9 @@ const AboutEdit = React.createClass({
 
 
   render() {
-    const starterAbout = { name: '', description: '', img: '', location: '', imgFile: ''}
-    const about = pathOr(starterAbout, ['profileData', 'about'], this.props)
+    const starterArticle = { name: '', description: '', img: '', location: '', imgFile: ''}
+    const articles = pathOr([], ['profileData', 'articles'], this.props)
+    const article = articles.length > 0 ? articles[this.props.params.id] : starterArticle
     return (
 
 
@@ -48,30 +53,27 @@ const AboutEdit = React.createClass({
       {this.state.resolved ? <Redirect to='/' /> : null}
         <form className="measure center" onSubmit={this.handleSubmit}>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f4 fw6 ph0 mh0 mid-gray">Edit About Me</legend>
+            <legend className="f4 fw6 ph0 mh0 mid-gray">Edit Article</legend>
             <div className="mt3">
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="name">Name</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={about.name} type="text" name="name" id="name" placeholder="Name" onChange={this.handleChange('name')} />
+              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.name} type="text" name="name" id="name" placeholder="Name" onChange={this.handleChange('name')} />
             </div>
             <div className="mv3">
-              <label className="db fw6 lh-copy f6 mid-gray" htmlFor="location">Location</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={about.location} type="text" name="location" id="location" placeholder="City, State" onChange={this.handleChange('location')} />
+              <label className="db fw6 lh-copy f6 mid-gray" htmlFor="location">Description</label>
+              <textarea className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.desc} type="text" name="desc" id="desc" placeholder="Description" onChange={this.handleChange('desc')} />
             </div>
             <div className="mt3">
-              <label className="db fw6 lh-copy f6 mid-gray" htmlFor="desc">Description</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={about.desc} type="text" name="desc" id="desc" placeholder="Description" onChange={this.handleChange('desc')} />
+              <label className="db fw6 lh-copy f6 mid-gray" htmlFor="desc">Author</label>
+              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.author} type="text" name="author" id="author" placeholder="Author" onChange={this.handleChange('author')} />
             </div>
-            <div className="mt3">
-              <label className="db fw6 lh-copy f6 mid-gray" htmlFor="image">Image</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={about.img} type="text" name="image" id="image" placeholder="Your Profile Photo" onChange={this.handleChange('img')} />
-            </div>
+
             <div className="mt3">
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="imageFile">Image</label>
               <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" type="file"  onChange={this.handleFileChange} />
             </div>
 
             <div className="mt3">
-              <img src={about.imgFile} alt="profile" style={{height: '200px'}} />
+              <img src={article.imgFile} alt="profile" style={{height: '200px'}} />
             </div>
 
           </fieldset>
@@ -87,4 +89,4 @@ const AboutEdit = React.createClass({
   }
 })
 
-module.exports = AboutEdit
+module.exports = ArticleEdit
