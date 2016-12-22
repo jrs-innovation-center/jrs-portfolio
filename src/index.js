@@ -7,6 +7,7 @@ const ArticleEdit = require('./components/articleedit')
 const NotFound = require('./components/not-found')
 const fetch = require('isomorphic-fetch')
 const PouchDB = require('pouchdb')
+const { pathOr, nth } = require('ramda')
 import './index.css'
 
 //TODO:  Below is for debug mode only.
@@ -51,7 +52,7 @@ const Root = React.createClass({
                 .catch(err => console.log(err))
             } else {
                 db.get('1', {include_docs: true}).then(profileData => {
-                    console.log("index.js profileData ", profileData)
+                    //console.log("index.js profileData ", profileData)
                     this.setState({dataLoadingState: 'Loaded', profileData: profileData})
                 })
                 .catch(err => console.log(err))
@@ -88,7 +89,15 @@ const Root = React.createClass({
             <Match exactly pattern="/aboutedit"
               render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
             <Match exactly pattern="/articleedit/:id"
-              render={(props) => <ArticleEdit {...props} updateArticleData={this.updateArticleData} saveData={this.saveData} profileData={this.state.profileData}/>} />
+              render={(props) => {
+                return <ArticleEdit {...props}
+                  updateArticleData={this.updateArticleData}
+                  saveData={this.saveData}
+                  article={nth(props.params.id, pathOr([],['state','profileData','articles'], this))}
+
+                />
+                }
+             } />
             <Miss component={NotFound}/>
           </div>
         </BrowserRouter>
@@ -96,5 +105,6 @@ const Root = React.createClass({
     }
 
 })
+
 
 ReactDOM.render(<Root /> ,document.getElementById('root'));

@@ -1,18 +1,25 @@
 const React = require('react')
 const { Redirect, Link } = require('react-router')
-const { set, lensProp, pathOr } = require('ramda')
+const { set, lensProp } = require('ramda')
 
 const ArticleEdit = React.createClass({
   getInitialState() {
     return {
-      resolved: false
+      resolved: false,
+      article: {
+        name: '',
+        desc: '',
+        author: '',
+        location: '',
+        imgFile: ''
+      }
     }
   },
  //profileData
  //{this.props.params.id}
   handleChange(field) {
     return e => {
-      this.props.updateArticleData(set(lensProp(field),e.target.value,this.props.profileData.articles[this.props.params.id]));
+      this.props.updateArticleData(set(lensProp(field),e.target.value,this.props.article));
     }
   },
 
@@ -20,10 +27,15 @@ const ArticleEdit = React.createClass({
 
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      console.log("this.props.params.id", this.props.params.id)
-      this.props.updateArticleData(this.props.params.id, set(lensProp('imgFile'),reader.result,this.props.profileData.articles[this.props.params.id]));
+      this.props.updateArticleData(this.props.params.id,
+        set(
+          lensProp('imgFile'),
+          reader.result,
+          this.props.article
+        )
+      )
+
     }, false)
-    console.log("handleFileChange e.target.files", e.target.files)
 
     if (e.target.files[0]) {
         reader.readAsDataURL(e.target.files[0])
@@ -43,9 +55,11 @@ const ArticleEdit = React.createClass({
 
 
   render() {
-    const starterArticle = { name: '', description: '', img: '', location: '', imgFile: ''}
-    const articles = pathOr([], ['profileData', 'articles'], this.props)
-    const article = articles.length > 0 ? articles[this.props.params.id] : starterArticle
+    //const starterArticle = { name: '', description: '', img: '', location: '', imgFile: ''}
+    // const articles = pathOr([], ['profileData', 'articles'], this.props)
+    // const article = articles.length > 0 ? articles[this.props.params.id] : starterArticle
+    const article = this.props.article ? this.props.article : this.state.article
+
     return (
 
 
