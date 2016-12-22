@@ -15,16 +15,15 @@ const ArticleEdit = React.createClass({
       }
     }
   },
- //profileData
- //{this.props.params.id}
+
   handleChange(field) {
     return e => {
-      this.props.updateArticleData(set(lensProp(field),e.target.value,this.props.article));
+      this.props.updateArticleData(this.props.params.id,
+        set(lensProp(field),e.target.value,this.props.article));
     }
   },
 
   handleFileChange(e) {
-
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
       this.props.updateArticleData(this.props.params.id,
@@ -53,16 +52,10 @@ const ArticleEdit = React.createClass({
     this.props.saveData().then(this.setState({resolved: true}))
   },
 
-
   render() {
-    //const starterArticle = { name: '', description: '', img: '', location: '', imgFile: ''}
-    // const articles = pathOr([], ['profileData', 'articles'], this.props)
-    // const article = articles.length > 0 ? articles[this.props.params.id] : starterArticle
     const article = this.props.article ? this.props.article : this.state.article
 
     return (
-
-
       <main className="pa4 black-80 bg-near-white">
       {this.state.resolved ? <Redirect to='/' /> : null}
         <form className="measure center" onSubmit={this.handleSubmit}>

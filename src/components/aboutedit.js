@@ -20,7 +20,6 @@ const AboutEdit = React.createClass({
     reader.addEventListener('load', () => {
       this.props.updateAboutData(set(lensProp('imgFile'),reader.result,this.props.profileData.about));
     }, false)
-    console.log("handleFileChange e", e)
     if (e.target.files[0]) {
         reader.readAsDataURL(e.target.files[0])
     }
@@ -39,11 +38,9 @@ const AboutEdit = React.createClass({
 
 
   render() {
-    const starterAbout = { name: '', description: '', img: '', location: '', imgFile: ''}
+    const starterAbout = { name: '', desc: '', location: '', imgFile: ''}
     const about = pathOr(starterAbout, ['profileData', 'about'], this.props)
     return (
-
-
       <main className="pa4 black-80 bg-near-white">
       {this.state.resolved ? <Redirect to='/' /> : null}
         <form className="measure center" onSubmit={this.handleSubmit}>
@@ -61,13 +58,10 @@ const AboutEdit = React.createClass({
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="desc">Description</label>
               <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={about.desc} type="text" name="desc" id="desc" placeholder="Description" onChange={this.handleChange('desc')} />
             </div>
-            <div className="mt3">
-              <label className="db fw6 lh-copy f6 mid-gray" htmlFor="image">Image</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={about.img} type="text" name="image" id="image" placeholder="Your Profile Photo" onChange={this.handleChange('img')} />
-            </div>
+
             <div className="mt3">
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="imageFile">Image</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" type="file"  onChange={this.handleFileChange} />
+              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" type="file" onChange={this.handleFileChange} />
             </div>
 
             <div className="mt3">

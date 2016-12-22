@@ -1,7 +1,5 @@
 const React = require('react')
-
 const DataImage = (props) => {
-  //const source = require('../img/' + props.source)
 
   const style = {
     width: '275px',

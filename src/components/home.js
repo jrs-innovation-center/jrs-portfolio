@@ -8,23 +8,22 @@ const Loading = require('./loading')
 const Footer = require('./footer')
 
 const Home = React.createClass({
-
     render() {
         const profileData = this.props.profileData
         const dataLoadingState = this.props.dataLoadingState
-        console.log("profileData: ", profileData)
+        
         if (dataLoadingState === 'Loading') {
             return <Loading/>
         }
         return (
-            <div>
-                <Nav/>
-                <About info={profileData.about}/>
-                <JRS articles={profileData.articles}/>
-                <Portfolio portfolio={profileData.portfolio}/>
-                <Skills skills={profileData.skills}/>
-                <Footer/>
-            </div>
+          <div>
+            <Nav/>
+            <About info={profileData.about}/>
+            <JRS articles={profileData.articles}/>
+            <Portfolio portfolio={profileData.portfolio}/>
+            <Skills skills={profileData.skills}/>
+            <Footer/>
+          </div>
         )
     }
 })

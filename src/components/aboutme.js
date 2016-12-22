@@ -5,6 +5,7 @@ const { Link } = require('react-router')
 const About = (props) => {
   return (
     <header id='about' className='tc pv4 pv5-ns bg-black'>
+
         <DataImage className="br2" source={props.info.imgFile} alt='avatar' />
 
         <h1 className='f5 f4-ns fw6 near-white'>{props.info.name}</h1>
@@ -16,6 +17,7 @@ const About = (props) => {
             <a className='f6 link dim br1 ba ph3 pv2 mb2 dib washed-blue' href={href}>Edit</a>
           }</Link>
         </div>
+
     </header>
   )
 }

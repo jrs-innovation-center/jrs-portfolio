@@ -27,8 +27,6 @@ const Root = React.createClass({
         const self = this
         db.changes({since: 'now', live: true, include_docs: true})
             .on('change', function(change) {
-                console.log("CHANGE!", change)
-
                 self.setState({profileData: change.doc})
             }).on('complete', function(info) {
                 // changes() was canceled
@@ -45,14 +43,10 @@ const Root = React.createClass({
                 .then(res => res.json())
                 .then(profileData => db.put(profileData))
                 .then(putResponse => console.log("putResponse: ", putResponse))
-                .then(profileData => {
-                    console.log("index.js profileData ", profileData)
-                    this.setState({dataLoadingState: 'Loaded'})
-                })
+                .then(profileData => {this.setState({dataLoadingState: 'Loaded'})})
                 .catch(err => console.log(err))
             } else {
                 db.get('1', {include_docs: true}).then(profileData => {
-                    //console.log("index.js profileData ", profileData)
                     this.setState({dataLoadingState: 'Loaded', profileData: profileData})
                 })
                 .catch(err => console.log(err))
@@ -71,14 +65,10 @@ const Root = React.createClass({
     },
 
     updateArticleData(index, updatedArticleData){
-        console.log("index.js article index", index)
-        console.log("index.js updatedArticleData", updatedArticleData)
         const profileData = {...this.state.profileData}
         profileData.articles[index] = updatedArticleData
         this.setState({ profileData })
     },
-
-
 
     render() {
       return (

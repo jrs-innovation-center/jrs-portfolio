@@ -3,7 +3,7 @@ const React = require('react')
 const DataImage = require('./dataImage')
 const { Link } = require('react-router')
 const Article = (props) => {
-  console.log("props", props)
+  
   return (
     <article className="pv4 bb b--black-10 ph3">
       <a className="db pv4 ph3 ph0-l no-underline black dim" href={props.info.href}>
@@ -28,5 +28,5 @@ const Article = (props) => {
   </article>
   )
 }
-//<Image source={props.info.img} alt={props.info.name} className="db br3"/>
+
 module.exports = Article
