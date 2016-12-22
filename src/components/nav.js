@@ -11,7 +11,7 @@ const Nav = () => {
         <a className="link dim near-white f6 f5-l dib mr3 mr4-l" href="#" title="Home">Home</a>
         <a className="link dim near-white f6 f5-l dib mr3 mr4-l" href="#about" title="About Me">About Me</a>
         <a className="link dim near-white f6 f5-l dib mr3 mr4-l" href="#jrs" title="JRS">JRS</a>
-        <a className="link dim near-white f6 f5-l dib mr3 mr4-l" href="#portfolio" title="Portfolio">Portfolio</a>
+        <a className="link dim near-white f6 f5-l dib mr3 mr4-l" href="#projects" title="Projects">Projects</a>
         <a className="link dim near-white f6 f5-l dib" href="#skills" title="Skills">Skills</a>
       </div>
     </nav>

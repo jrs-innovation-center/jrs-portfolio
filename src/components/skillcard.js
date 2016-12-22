@@ -3,7 +3,7 @@ const Image = require('./image')
 
 const SkillCard = (props) => {
   return (
-    <div className="fl w-100 w-10-ns tc bg-near-white">
+    <div className="fl w-100 w-10-ns tc white">
       <article className="grow center">
           <div className="tc">
             <a href={props.info.href} target="_blank">

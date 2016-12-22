@@ -3,18 +3,37 @@ const Image = require('./image')
 
 const PortfolioCard = (props) => {
   return (
-    <div className="fl w-25 h-50 tc pa1">
-      <article className="grow mw5 center bg-white br3 pa3 pa4-ns mv3 ba b--black-10">
-          <div className="tc">
-            <a href={props.info.href} >
-              <Image source={props.info.img} alt={props.info.name} className="br-100 h3 w3 dib ba b--black-05 pa2"/>
-            </a>
-            <h1 className="f3 mb2">{props.info.name}</h1>
-            <h2 className="f5 fw4 gray mt0">{props.info.desc}</h2>
-          </div>
-      </article>
-    </div>
+
+
+
+    <article className="fl center dim  br3 pa4-ns ma3 ph3 w-100 w-50-m w-25-ns">
+      <div className="tc">
+        <Image source={props.info.img} alt={props.info.name} className="br-100 h4 w4 dib" title={props.info.name}/>
+        <h1 className="f4">{props.info.name}</h1>
+        <hr className="mw3 bb bw1 b--black-10"/>
+      </div>
+      <p className="lh-copy measure center f6 black-70">{props.info.desc}</p>
+    </article>
+
+
   )
 }
+// <article className="fl center dim bg-white br3 pa3 pa4-ns mv3 ba b--black-10 w-100 w-50-m w-25-ns ">
+//   <a href="#" className="link black db mw5 pa2 br2 b--black-10">
+//
+//   <div className="tc">
+//
+//       <Image source={props.info.img} alt={props.info.name} className="br-100 h4 w4 dib" title={props.info.name}/>
+//       <span><h1 className="f4">{props.info.name}</h1></span>
+//
+//     <hr className="mw3 bb bw1 b--black-10"/>
+//
+//   <p className="lh-copy measure center f6 black-70">
+//   {props.info.desc}
+//   </p>
+//   </div>
+//   </a>
+// </article>
+
 
 module.exports = PortfolioCard
