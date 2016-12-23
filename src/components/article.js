@@ -1,12 +1,13 @@
 const React = require('react')
-//const Image = require('./image')
 const DataImage = require('./dataImage')
 const { Link } = require('react-router')
+
 const Article = (props) => {
-  
+  const EditButton = props.editMode === true ? <Link to={`/articleedit/${props.index}`}>{({href}) => <a className='f6 link dim br1 ba ph3 pv2 mb2 dib washed-blue' href={href}>Edit</a>}</Link> : null
+
   return (
     <article className="pv4 bb b--black-10 ph3">
-      <a className="db pv4 ph3 ph0-l no-underline black dim" href={props.info.href}>
+      <a className="db pv4 ph3 ph0-l no-underline black dim" target="_blank" href={props.info.href}>
         <div className="flex flex-column flex-row-ns">
           <div className="w-100 w-60-ns pr3-ns order-2 order-1-ns">
             <h3 className="f3 baskerville mt0 washed-blue">{props.info.name}</h3>
@@ -21,9 +22,7 @@ const Article = (props) => {
         <p className="f6 lh-copy washed-blue mv0">By <span className="ttu">{props.info.author}</span></p>
     </a>
     <div className="tc">
-      <Link to={`/articleedit/${props.index}`}>{({href}) =>
-        <a className='f6 link dim br1 ba ph3 pv2 mb2 dib washed-blue' href={href}>Edit</a>
-      }</Link>
+      {EditButton}
     </div>
   </article>
   )

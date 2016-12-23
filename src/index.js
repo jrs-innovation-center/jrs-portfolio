@@ -4,6 +4,10 @@ const {BrowserRouter, Match, Miss} = require('react-router')
 const Home = require('./components/home')
 const AboutEdit = require('./components/aboutedit')
 const ArticleEdit = require('./components/articleedit')
+const SkillEdit = require('./components/skilledit')
+
+
+
 const NotFound = require('./components/not-found')
 const fetch = require('isomorphic-fetch')
 const PouchDB = require('pouchdb')
@@ -19,8 +23,9 @@ const db = new PouchDB('jrs-portfolio')
 const Root = React.createClass({
     getInitialState() {
         return {
-            dataLoadingState: 'Loading'
-            , profileData: null}
+            dataLoadingState: 'Loading',
+            profileData: null
+        }
     },
 
     componentDidMount() {
@@ -70,6 +75,12 @@ const Root = React.createClass({
         this.setState({ profileData })
     },
 
+    updateSkillData(index, updatedSkillData){
+        const profileData = {...this.state.profileData}
+        profileData.skills[index] = updatedSkillData
+        this.setState({ profileData })
+    },
+
     render() {
       return (
         <BrowserRouter>
@@ -84,10 +95,19 @@ const Root = React.createClass({
                   updateArticleData={this.updateArticleData}
                   saveData={this.saveData}
                   article={nth(props.params.id, pathOr([],['state','profileData','articles'], this))}
-
                 />
                 }
              } />
+             <Match exactly pattern="/skilledit/:id"
+               render={(props) => {
+                 return <SkillEdit {...props}
+                   updateSkillData={this.updateSkillData}
+                   saveData={this.saveData}
+                   skill={nth(props.params.id, pathOr([],['state','profileData','skills'], this))}
+                 />
+                 }
+              } />
+
             <Miss component={NotFound}/>
           </div>
         </BrowserRouter>
