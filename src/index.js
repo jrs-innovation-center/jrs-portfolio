@@ -5,9 +5,7 @@ const Home = require('./components/home')
 const AboutEdit = require('./components/aboutedit')
 const ArticleEdit = require('./components/articleedit')
 const SkillEdit = require('./components/skilledit')
-
-
-
+const Settings = require('./components/settings')
 const NotFound = require('./components/not-found')
 const fetch = require('isomorphic-fetch')
 const PouchDB = require('pouchdb')
@@ -60,7 +58,14 @@ const Root = React.createClass({
     },
 
     saveData() {
-        return db.put(this.state.profileData)
+      return db.put(this.state.profileData)
+    },
+
+    updateEditMode(editMode) {
+      const profileData = {...this.state.profileData}
+      profileData.editMode = editMode
+      this.setState({ profileData })
+      console.log("index.js updateEditMode ", profileData)
     },
 
     updateAboutData(updatedAboutData){
@@ -107,6 +112,15 @@ const Root = React.createClass({
                  />
                  }
               } />
+              <Match exactly pattern="/settings"
+                    render={(props) => {
+                      return <Settings {...props}
+                        updateEditMode={this.updateEditMode}
+                        saveData={this.saveData}
+                        profileData={this.state.profileData}
+                      />
+                      }
+                } />
 
             <Miss component={NotFound}/>
           </div>
@@ -115,6 +129,7 @@ const Root = React.createClass({
     }
 
 })
+
 
 
 ReactDOM.render(<Root /> ,document.getElementById('root'));
