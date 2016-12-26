@@ -18,21 +18,35 @@ const ArticleEdit = React.createClass({
 
   handleChange(field) {
     return e => {
-      this.props.updateArticleData(this.props.params.id,
-        set(lensProp(field),e.target.value,this.props.article));
+      if (this.props.params.id) {
+        //edit mode
+        return this.props.updateArticleData(this.props.params.id,
+          set(lensProp(field),e.target.value,this.props.article))
+      }
+      const article = {...this.state.article}
+      article[field] = e.target.value
+      this.setState({article})
+
     }
   },
 
   handleFileChange(e) {
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      this.props.updateArticleData(this.props.params.id,
+      if (this.props.params.id) {
+        //edit mode
+        return this.props.updateArticleData(this.props.params.id,
         set(
           lensProp('imgFile'),
           reader.result,
           this.props.article
+          )
         )
-      )
+      }
+
+      const article = {...this.state.article}
+      article.imgFile = reader.result
+      this.setState({article})
 
     }, false)
 
@@ -49,18 +63,34 @@ const ArticleEdit = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
+    if (this.props.params.id) {
+      //this is an edit of an existing skill
+      return this.props.saveData().then(this.setState({resolved: true}))
+    }
+    this.props.addArticle(this.state.article)
     this.props.saveData().then(this.setState({resolved: true}))
+  },
+
+  handleDelete(e) {
+    e.preventDefault()
+    if (this.props.params.id) {
+      //this is an edit of an existing skill
+      this.props.deleteArticle(this.props.params.id)
+      this.props.saveData().then(this.setState({resolved: true}))
+    }
   },
 
   render() {
     const article = this.props.article ? this.props.article : this.state.article
+    const articleLegend = this.props.params.id ? 'Edit Article' : 'Add Article'
+    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline grow dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Article</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">
       {this.state.resolved ? <Redirect to='/' /> : null}
         <form className="measure center" onSubmit={this.handleSubmit}>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f4 fw6 ph0 mh0 mid-gray">Edit Article</legend>
+            <legend className="f4 fw6 ph0 mh0 mid-gray">{articleLegend}</legend>
             <div className="mt3">
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="name">Name</label>
               <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.name} type="text" name="name" id="name" placeholder="Name" onChange={this.handleChange('name')} />
@@ -94,6 +124,7 @@ const ArticleEdit = React.createClass({
             <Link to="/">{ ({href}) =>
               <a className="f6 no-underline grow dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
             }</Link>
+            {deleteButton}
           </div>
         </form>
       </main>

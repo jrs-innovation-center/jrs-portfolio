@@ -73,47 +73,79 @@ const Root = React.createClass({
         this.setState({ profileData })
     },
 
+
+
+    /////////////
+    // ARTICLES
+    /////////////
     updateArticleData(index, updatedArticleData){
         const profileData = {...this.state.profileData}
         profileData.articles[index] = updatedArticleData
         this.setState({ profileData })
     },
+    deleteArticle(index){
+        const profileData = {...this.state.profileData}
+        profileData.articles.splice(index,1)
+        this.setState({ profileData })
+    },
+    addArticle(article){
+        const profileData = {...this.state.profileData}
+        profileData.articles.push(article)
+        this.setState({profileData})
+    },
 
+
+
+    /////////////
+    // SKILLS
+    /////////////
     updateSkillData(index, updatedSkillData){
         const profileData = {...this.state.profileData}
         profileData.skills[index] = updatedSkillData
         this.setState({ profileData })
     },
-
     deleteSkill(index){
         const profileData = {...this.state.profileData}
         profileData.skills.splice(index,1)
         this.setState({ profileData })
     },
-
     addSkill(skill){
         const profileData = {...this.state.profileData}
         profileData.skills.push(skill)
         this.setState({profileData})
     },
 
+
+
     render() {
       return (
         <BrowserRouter>
           <div>
-              <Match exactly pattern="/"
+            <Match exactly pattern="/"
               render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
-              <Match exactly pattern="/aboutedit"
+
+            <Match exactly pattern="/aboutedit"
               render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
-              <Match exactly pattern="/articleedit/:id"
+
+            <Match exactly pattern="/articleedit/:id"
               render={(props) => {
                 return <ArticleEdit {...props}
                   updateArticleData={this.updateArticleData}
+                  deleteArticle={this.deleteArticle}
                   saveData={this.saveData}
                   article={nth(props.params.id, pathOr([],['state','profileData','articles'], this))}
                 />
                 }
               } />
+
+              <Match exactly pattern="/articleadd"
+                  render={(props) => {
+                    return <ArticleEdit {...props}
+                      addArticle={this.addArticle}
+                      saveData={this.saveData}
+                    />
+                    }
+                } />
 
               <Match exactly pattern="/skilledit/:id"
                render={(props) => {
