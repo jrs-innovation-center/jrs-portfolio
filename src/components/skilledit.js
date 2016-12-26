@@ -74,10 +74,8 @@ const SkillEdit = React.createClass({
 
   handleDelete(e) {
     e.preventDefault()
-    console.log("handleDelete")
     if (this.props.params.id) {
       //this is an edit of an existing skill
-      console.log("deleteSkill with index: ", this.props.params.id )
       this.props.deleteSkill(this.props.params.id)
       this.props.saveData().then(this.setState({resolved: true}))
     }
@@ -86,7 +84,7 @@ const SkillEdit = React.createClass({
   render() {
     const skill = this.props.skill ? this.props.skill : this.state.skill
     const skillLegend = this.props.params.id ? 'Edit Skill' : 'Add Skill'
-    const deleteButton = this.props.params.id ? <button onClick={this.handleDelete}>Delete Skill</button>: null
+    const deleteButton = this.props.params.id ? <button className="f6 no-underline grow dib v-mid mid-gray bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Skill</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">
