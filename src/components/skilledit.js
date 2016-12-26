@@ -72,12 +72,22 @@ const SkillEdit = React.createClass({
     this.props.saveData().then(this.setState({resolved: true}))
   },
 
+  handleDelete(e) {
+    e.preventDefault()
+    console.log("handleDelete")
+    if (this.props.params.id) {
+      //this is an edit of an existing skill
+      console.log("deleteSkill with index: ", this.props.params.id )
+      this.props.deleteSkill(this.props.params.id)
+      this.props.saveData().then(this.setState({resolved: true}))
+    }
+  },
+
   render() {
     const skill = this.props.skill ? this.props.skill : this.state.skill
-
     const skillLegend = this.props.params.id ? 'Edit Skill' : 'Add Skill'
+    const deleteButton = this.props.params.id ? <button onClick={this.handleDelete}>Delete Skill</button>: null
 
-    console.log("render skill", skill)
     return (
       <main className="pa4 black-80 bg-near-white">
       {this.state.resolved ? <Redirect to='/' /> : null}
@@ -116,6 +126,7 @@ const SkillEdit = React.createClass({
             <Link to="/">{ ({href}) =>
               <a className="f6 no-underline grow dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
             }</Link>
+            {deleteButton}
           </div>
 
         </form>

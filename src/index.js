@@ -65,7 +65,6 @@ const Root = React.createClass({
       const profileData = {...this.state.profileData}
       profileData.editMode = editMode
       this.setState({ profileData })
-      console.log("index.js updateEditMode ", profileData)
     },
 
     updateAboutData(updatedAboutData){
@@ -83,6 +82,12 @@ const Root = React.createClass({
     updateSkillData(index, updatedSkillData){
         const profileData = {...this.state.profileData}
         profileData.skills[index] = updatedSkillData
+        this.setState({ profileData })
+    },
+
+    deleteSkill(index){
+        const profileData = {...this.state.profileData}
+        profileData.skills.splice(index,1)
         this.setState({ profileData })
     },
 
@@ -114,6 +119,7 @@ const Root = React.createClass({
                render={(props) => {
                  return <SkillEdit {...props}
                    updateSkillData={this.updateSkillData}
+                   deleteSkill={this.deleteSkill}
                    saveData={this.saveData}
                    skill={nth(props.params.id, pathOr([],['state','profileData','skills'], this))}
                  />
