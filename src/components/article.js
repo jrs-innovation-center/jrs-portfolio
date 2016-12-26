@@ -3,7 +3,10 @@ const DataImage = require('./dataImage')
 const { Link } = require('react-router')
 
 const Article = (props) => {
-  const EditButton = props.editMode === true ? <Link to={`/articleedit/${props.index}`}>{({href}) => <a className='f6 link dim br1 ba ph3 pv2 mb2 dib washed-blue' href={href}>Edit</a>}</Link> : null
+  const EditButton = props.editMode === true ?
+    <Link to={`/articleedit/${props.index}`}>
+      {({href}) => <a className='f6 link dim br1 ba ph3 pv2 mb2 dib washed-blue' href={href}>Edit</a>}
+    </Link> : null
 
   return (
     <article className="pv4 bb b--black-10 ph3">
@@ -15,16 +18,15 @@ const Article = (props) => {
 
           </div>
           <div className="pl3-ns order-1 order-2-ns mb4 mb0-ns w-100 w-40-ns">
-
             <DataImage className="db br3" source={props.info.imgFile} alt={props.info.name} />
           </div>
         </div>
         <p className="f6 lh-copy washed-blue mv0">By <span className="ttu">{props.info.author}</span></p>
-    </a>
-    <div className="tc">
-      {EditButton}
-    </div>
-  </article>
+      </a>
+      <div className="tc">
+        {EditButton}
+      </div>
+    </article>
   )
 }
 

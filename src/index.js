@@ -4,6 +4,7 @@ const {BrowserRouter, Match, Miss} = require('react-router')
 const Home = require('./components/home')
 const AboutEdit = require('./components/aboutedit')
 const ArticleEdit = require('./components/articleedit')
+const PortfolioEdit = require('./components/portfolioedit')
 const SkillEdit = require('./components/skilledit')
 const Settings = require('./components/settings')
 const NotFound = require('./components/not-found')
@@ -97,6 +98,34 @@ const Root = React.createClass({
 
 
     /////////////
+    // Portfolio
+    /////////////
+    updatePortfolioData(index, updatedPortfolioData){
+        const profileData = {...this.state.profileData}
+        profileData.portfolio[index] = updatedPortfolioData
+        this.setState({ profileData })
+    },
+    deletePortfolio(index){
+        const profileData = {...this.state.profileData}
+        profileData.portfolio.splice(index,1)
+        this.setState({ profileData })
+    },
+    addPortfolio(portfolio){
+        const profileData = {...this.state.profileData}
+        profileData.portfolio.push(portfolio)
+        this.setState({profileData})
+    },
+
+
+
+
+
+
+
+
+
+
+    /////////////
     // SKILLS
     /////////////
     updateSkillData(index, updatedSkillData){
@@ -146,6 +175,34 @@ const Root = React.createClass({
                     />
                     }
                 } />
+
+
+
+
+            <Match exactly pattern="/portfolioedit/:id"
+                  render={(props) => {
+                    return <PortfolioEdit {...props}
+                      updatePortfolioData={this.updatePortfolioData}
+                      deletePortfolio={this.deletePortfolio}
+                      saveData={this.saveData}
+                      portfolio={nth(props.params.id, pathOr([],['state','profileData','portfolio'], this))}
+                    />
+                    }
+                  } />
+
+              <Match exactly pattern="/portfolioadd"
+                  render={(props) => {
+                    return <PortfolioEdit {...props}
+                      addPortfolio={this.addPortfolio}
+                      saveData={this.saveData}
+                    />
+                    }
+                } />
+
+
+
+
+
 
               <Match exactly pattern="/skilledit/:id"
                render={(props) => {

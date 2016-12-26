@@ -2,14 +2,13 @@ const React = require('react')
 const { Redirect, Link } = require('react-router')
 const { set, lensProp } = require('ramda')
 
-const ArticleEdit = React.createClass({
+const PortfolioEdit = React.createClass({
   getInitialState() {
     return {
       resolved: false,
-      article: {
+      portfolio: {
         name: '',
         desc: '',
-        author: '',
         href: '',
         imgFile: ''
       }
@@ -20,12 +19,12 @@ const ArticleEdit = React.createClass({
     return e => {
       if (this.props.params.id) {
         //edit mode
-        return this.props.updateArticleData(this.props.params.id,
-          set(lensProp(field),e.target.value,this.props.article))
+        return this.props.updatePortfolioData(this.props.params.id,
+          set(lensProp(field),e.target.value,this.props.portfolio))
       }
-      const article = {...this.state.article}
-      article[field] = e.target.value
-      this.setState({article})
+      const portfolio = {...this.state.portfolio}
+      portfolio[field] = e.target.value
+      this.setState({portfolio})
 
     }
   },
@@ -35,18 +34,18 @@ const ArticleEdit = React.createClass({
     reader.addEventListener('load', () => {
       if (this.props.params.id) {
         //edit mode
-        return this.props.updateArticleData(this.props.params.id,
+        return this.props.updatePortfolioData(this.props.params.id,
         set(
           lensProp('imgFile'),
           reader.result,
-          this.props.article
+          this.props.portfolio
           )
         )
       }
 
-      const article = {...this.state.article}
-      article.imgFile = reader.result
-      this.setState({article})
+      const portfolio = {...this.state.portfolio}
+      portfolio.imgFile = reader.result
+      this.setState({portfolio})
 
     }, false)
 
@@ -67,7 +66,7 @@ const ArticleEdit = React.createClass({
       //this is an edit of an existing skill
       return this.props.saveData().then(this.setState({resolved: true}))
     }
-    this.props.addArticle(this.state.article)
+    this.props.addPortfolio(this.state.portfolio)
     this.props.saveData().then(this.setState({resolved: true}))
   },
 
@@ -75,38 +74,34 @@ const ArticleEdit = React.createClass({
     e.preventDefault()
     if (this.props.params.id) {
       //this is an edit of an existing skill
-      this.props.deleteArticle(this.props.params.id)
+      this.props.deletePortfolio(this.props.params.id)
       this.props.saveData().then(this.setState({resolved: true}))
     }
   },
 
   render() {
-    const article = this.props.article ? this.props.article : this.state.article
-    const articleLegend = this.props.params.id ? 'Edit Article' : 'Add Article'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Article</button>: null
+    const portfolio = this.props.portfolio ? this.props.portfolio : this.state.portfolio
+    const portfolioLegend = this.props.params.id ? 'Edit Project' : 'Add Project'
+    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Portfolio</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">
       {this.state.resolved ? <Redirect to='/' /> : null}
         <form className="measure center" onSubmit={this.handleSubmit}>
           <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-            <legend className="f4 fw6 ph0 mh0 mid-gray">{articleLegend}</legend>
+            <legend className="f4 fw6 ph0 mh0 mid-gray">{portfolioLegend}</legend>
             <div className="mt3">
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="name">Name</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.name} type="text" name="name" id="name" placeholder="Name" onChange={this.handleChange('name')} />
+              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={portfolio.name} type="text" name="name" id="name" placeholder="Name" onChange={this.handleChange('name')} />
             </div>
             <div className="mv3">
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="desc">Description</label>
-              <textarea className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.desc} type="text" name="desc" id="desc" placeholder="Description" onChange={this.handleChange('desc')} />
-            </div>
-            <div className="mt3">
-              <label className="db fw6 lh-copy f6 mid-gray" htmlFor="author">Author</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.author} type="text" name="author" id="author" placeholder="Author" onChange={this.handleChange('author')} />
+              <textarea className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={portfolio.desc} type="text" name="desc" id="desc" placeholder="Description" onChange={this.handleChange('desc')} />
             </div>
 
             <div className="mt3">
               <label className="db fw6 lh-copy f6 mid-gray" htmlFor="href">URL</label>
-              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={article.href} type="text" name="href" id="href" placeholder="URL" onChange={this.handleChange('href')} />
+              <input className="pa2 input-reset ba mid-gray bg-white hover-bg-black hover-white w-100" value={portfolio.href} type="text" name="href" id="href" placeholder="URL" onChange={this.handleChange('href')} />
             </div>
 
             <div className="mt3">
@@ -115,7 +110,7 @@ const ArticleEdit = React.createClass({
             </div>
 
             <div className="mt3">
-              <img src={article.imgFile} alt="profile" style={{height: '200px'}} />
+              <img src={portfolio.imgFile} alt="profile" style={{height: '200px'}} />
             </div>
 
           </fieldset>
@@ -132,4 +127,4 @@ const ArticleEdit = React.createClass({
   }
 })
 
-module.exports = ArticleEdit
+module.exports = PortfolioEdit
