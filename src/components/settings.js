@@ -1,6 +1,6 @@
 const React = require('react')
 const { Redirect, Link } = require('react-router')
-const { set, lensPath, view, lensProp} = require('ramda')
+const {  lensPath, view} = require('ramda')
 
 const Settings = React.createClass({
   getInitialState() {
@@ -23,7 +23,6 @@ const Settings = React.createClass({
 
   render() {
     const editMode =  view(lensPath(['profileData', 'editMode']), this.props);
-    console.log("editModeCheckBox checked? ", editMode)
     const editModeCheckBox = <input checked={editMode} type="checkbox" id="editMode"  onChange={this.handleChange('editMode')}/>
 
     return (

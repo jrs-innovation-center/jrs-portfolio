@@ -86,15 +86,21 @@ const Root = React.createClass({
         this.setState({ profileData })
     },
 
+    addSkill(skill){
+        const profileData = {...this.state.profileData}
+        profileData.skills.push(skill)
+        this.setState({profileData})
+    },
+
     render() {
       return (
         <BrowserRouter>
           <div>
-            <Match exactly pattern="/"
+              <Match exactly pattern="/"
               render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
-            <Match exactly pattern="/aboutedit"
+              <Match exactly pattern="/aboutedit"
               render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
-            <Match exactly pattern="/articleedit/:id"
+              <Match exactly pattern="/articleedit/:id"
               render={(props) => {
                 return <ArticleEdit {...props}
                   updateArticleData={this.updateArticleData}
@@ -102,8 +108,9 @@ const Root = React.createClass({
                   article={nth(props.params.id, pathOr([],['state','profileData','articles'], this))}
                 />
                 }
-             } />
-             <Match exactly pattern="/skilledit/:id"
+              } />
+
+              <Match exactly pattern="/skilledit/:id"
                render={(props) => {
                  return <SkillEdit {...props}
                    updateSkillData={this.updateSkillData}
@@ -112,6 +119,16 @@ const Root = React.createClass({
                  />
                  }
               } />
+
+              <Match exactly pattern="/skilladd"
+                  render={(props) => {
+                    return <SkillEdit {...props}
+                      addSkill={this.addSkill}
+                      saveData={this.saveData}
+                    />
+                    }
+                } />
+
               <Match exactly pattern="/settings"
                     render={(props) => {
                       return <Settings {...props}
@@ -122,6 +139,8 @@ const Root = React.createClass({
                       }
                 } />
 
+
+
             <Miss component={NotFound}/>
           </div>
         </BrowserRouter>
@@ -129,7 +148,5 @@ const Root = React.createClass({
     }
 
 })
-
-
 
 ReactDOM.render(<Root /> ,document.getElementById('root'));
