@@ -23,7 +23,11 @@ const Settings = React.createClass({
 
   render() {
     const editMode =  view(lensPath(['profileData', 'editMode']), this.props);
-    const editModeCheckBox = <input checked={editMode} type="checkbox" id="editMode"  onChange={this.handleChange('editMode')}/>
+    const editModeCheckBox = <input
+      checked={editMode}
+      type="checkbox"
+      id="editMode"
+      onChange={this.handleChange('editMode')}/>
 
     return (
       <main className="pa4 black-80 bg-near-white">
@@ -35,9 +39,12 @@ const Settings = React.createClass({
           {editModeCheckBox}
           </fieldset>
           <div className="">
-            <input className="b f6 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2" type="submit" value="Save"/>
+            <input className="b br1 f6 no-underline dim dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2"
+              type="submit"
+              value="Save"/>
             <Link to="/">{ ({href}) =>
-              <a className="f6 no-underline grow dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
+              <a className="f6 br1 no-underline dim dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2"
+                href={href}>Cancel</a>
             }</Link>
           </div>
         </form>

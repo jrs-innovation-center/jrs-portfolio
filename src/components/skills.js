@@ -4,10 +4,10 @@ const { Link } = require('react-router')
 
 const Skills = (props) => {
   const addSkillButton = props.editMode ? <div className="tr pa3">
-    <Link to="/skilladd">{ ({href}) =>
-      <a className="f6 br1 no-underline dib v-mid dark-green ba b--green ph3 pv2 mb3 mr2" href={href}>Add Skill</a>
-    }</Link>
-</div> : null
+      <Link to="/skilladd">{ ({href}) =>
+        <a className="f6 dim br1 no-underline dib v-mid dark-green ba b--green ph3 pv2 mb3 mr2" href={href}>Add Skill</a>
+      }</Link>
+    </div> : null
 
   return (
 

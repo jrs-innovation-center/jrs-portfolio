@@ -70,9 +70,9 @@ const AboutEdit = React.createClass({
 
           </fieldset>
           <div className="">
-            <input className="b f6 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2" type="submit" value="Save"/>
+            <input className="b f6 no-underline dim dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2" type="submit" value="Save"/>
             <Link to="/">{ ({href}) =>
-              <a className="f6 no-underline grow dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
+              <a className="f6 no-underline dim dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
             }</Link>
           </div>
         </form>

@@ -81,7 +81,7 @@ const SkillEdit = React.createClass({
   render() {
     const skill = this.props.skill ? this.props.skill : this.state.skill
     const skillLegend = this.props.params.id ? 'Edit Skill' : 'Add Skill'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline grow dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Skill</button>: null
+    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Skill</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">
@@ -117,9 +117,9 @@ const SkillEdit = React.createClass({
           </fieldset>
 
           <div className="">
-            <input className="b br1 f6 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2" type="submit" value="Save"/>
+            <input className="b br1 f6 no-underline dim dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2" type="submit" value="Save"/>
             <Link to="/">{ ({href}) =>
-              <a className="f6 br1 no-underline grow dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
+              <a className="f6 br1 no-underline dim dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
             }</Link>
             {deleteButton}
           </div>

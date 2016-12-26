@@ -83,7 +83,7 @@ const ArticleEdit = React.createClass({
   render() {
     const article = this.props.article ? this.props.article : this.state.article
     const articleLegend = this.props.params.id ? 'Edit Article' : 'Add Article'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline grow dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Article</button>: null
+    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Article</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">
@@ -120,9 +120,9 @@ const ArticleEdit = React.createClass({
 
           </fieldset>
           <div className="">
-            <input className="b f6 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2" type="submit" value="Save"/>
+            <input className="b f6 no-underline dim dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2" type="submit" value="Save"/>
             <Link to="/">{ ({href}) =>
-              <a className="f6 no-underline grow dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
+              <a className="f6 no-underline dim dib v-mid mid-gray ba b--black-20 ph3 pv2 mb3 mr2" href={href}>Cancel</a>
             }</Link>
             {deleteButton}
           </div>
