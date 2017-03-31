@@ -203,8 +203,8 @@ const Root = React.createClass({
 
               <Route exact path="/skilladd" render={(props) => {
                       return <SkillEdit {...props}
-                      addSkill={this.addSkill}
-
+                      addSkill={this.addSkill} />
+              }} />
 
               <Route exact path="/settings" render={(props) => {
                       return <Settings {...props}
