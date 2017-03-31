@@ -1,5 +1,5 @@
 const React = require('react')
-const { Redirect, Link } = require('react-router')
+const { Redirect, Link } = require('react-router-dom')
 const { set, lensProp } = require('ramda')
 
 const PortfolioEdit = React.createClass({
@@ -32,7 +32,7 @@ const PortfolioEdit = React.createClass({
   handleFileChange(e) {
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
         return this.props.updatePortfolioData(this.props.params.id,
         set(
@@ -81,8 +81,8 @@ const PortfolioEdit = React.createClass({
 
   render() {
     const portfolio = this.props.portfolio ? this.props.portfolio : this.state.portfolio
-    const portfolioLegend = this.props.params.id ? 'Edit Project' : 'Add Project'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Portfolio</button>: null
+    const portfolioLegend = this.props.match.params.id ? 'Edit Project' : 'Add Project'
+    const deleteButton = this.props.match.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Portfolio</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">

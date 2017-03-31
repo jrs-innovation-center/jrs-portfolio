@@ -1,5 +1,5 @@
 const React = require('react')
-const { Redirect, Link } = require('react-router')
+const { Redirect, Link } = require('react-router-dom')
 const { set, lensProp } = require('ramda')
 
 const SkillEdit = React.createClass({
@@ -17,7 +17,7 @@ const SkillEdit = React.createClass({
 
   handleChange(field) {
     return e => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
         return this.props.updateSkillData(this.props.params.id,
           set(lensProp(field),e.target.value,this.props.skill))
@@ -80,8 +80,8 @@ const SkillEdit = React.createClass({
 
   render() {
     const skill = this.props.skill ? this.props.skill : this.state.skill
-    const skillLegend = this.props.params.id ? 'Edit Skill' : 'Add Skill'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Skill</button>: null
+    const skillLegend = this.props.match.params.id ? 'Edit Skill' : 'Add Skill'
+    const deleteButton = this.props.match.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Skill</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">

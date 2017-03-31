@@ -1,5 +1,5 @@
 const React = require('react')
-const { Redirect, Link } = require('react-router')
+const { Redirect, Link } = require('react-router-dom')
 const {  lensPath, view} = require('ramda')
 
 const Settings = React.createClass({
