@@ -1,5 +1,5 @@
 const React = require('react')
-const { Redirect, Link } = require('react-router')
+const { Redirect, Link } = require('react-router-dom')
 const { set, lensProp } = require('ramda')
 
 const SkillEdit = React.createClass({
@@ -17,9 +17,9 @@ const SkillEdit = React.createClass({
 
   handleChange(field) {
     return e => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
-        return this.props.updateSkillData(this.props.params.id,
+        return this.props.updateSkillData(this.props.match.params.id,
           set(lensProp(field),e.target.value,this.props.skill))
       }
       const skill = {...this.state.skill}
@@ -31,9 +31,9 @@ const SkillEdit = React.createClass({
   handleFileChange(e) {
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
-        return this.props.updateSkillData(this.props.params.id,
+        return this.props.updateSkillData(this.props.match.params.id,
           set(
             lensProp('imgFile'),
             reader.result,
@@ -61,7 +61,7 @@ const SkillEdit = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
       return this.props.saveData().then(this.setState({resolved: true}))
     }
@@ -71,17 +71,17 @@ const SkillEdit = React.createClass({
 
   handleDelete(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
-      this.props.deleteSkill(this.props.params.id)
+      this.props.deleteSkill(this.props.match.params.id)
       this.props.saveData().then(this.setState({resolved: true}))
     }
   },
 
   render() {
     const skill = this.props.skill ? this.props.skill : this.state.skill
-    const skillLegend = this.props.params.id ? 'Edit Skill' : 'Add Skill'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Skill</button>: null
+    const skillLegend = this.props.match.params.id ? 'Edit Skill' : 'Add Skill'
+    const deleteButton = this.props.match.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Skill</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">

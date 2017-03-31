@@ -1,6 +1,7 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const {BrowserRouter, Match, Miss} = require('react-router')
+//const {BrowserRouter, Match, Miss} = require('react-router')
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 const Home = require('./components/home')
 const AboutEdit = require('./components/aboutedit')
 const ArticleEdit = require('./components/articleedit')
@@ -150,48 +151,38 @@ const Root = React.createClass({
       return (
         <BrowserRouter>
           <div>
-            <Match exactly pattern="/"
-              render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
-
-            <Match exactly pattern="/aboutedit"
-              render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
-
-            <Match exactly pattern="/articleedit/:id"
-              render={(props) => {
-                return <ArticleEdit {...props}
-                  updateArticleData={this.updateArticleData}
-                  deleteArticle={this.deleteArticle}
-                  saveData={this.saveData}
-                  article={nth(props.params.id, pathOr([],['state','profileData','articles'], this))}
-                />
+             <Switch>
+                <Route exact path="/" render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
+                <Route exact path="/aboutedit"
+                     render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
+                <Route exact path="/articleedit/:id" render={(props) => {
+                    return <ArticleEdit {...props}
+                            updateArticleData={this.updateArticleData}
+                            deleteArticle={this.deleteArticle}
+                            saveData={this.saveData}
+                            article={nth(props.match.params.id, pathOr([],['state','profileData','articles'], this))}
+                            />
                 }
               } />
-
-              <Match exactly pattern="/articleadd"
-                  render={(props) => {
-                    return <ArticleEdit {...props}
-                      addArticle={this.addArticle}
-                      saveData={this.saveData}
-                    />
+                <Route exact path="/articleadd" render={(props) => {
+                        return <ArticleEdit {...props}
+                            addArticle={this.addArticle}
+                            saveData={this.saveData}
+                            />
                     }
                 } />
 
-
-
-
-            <Match exactly pattern="/portfolioedit/:id"
-                  render={(props) => {
+                <Route exact path="/portfolioedit/:id" render={(props) => {
                     return <PortfolioEdit {...props}
                       updatePortfolioData={this.updatePortfolioData}
                       deletePortfolio={this.deletePortfolio}
                       saveData={this.saveData}
-                      portfolio={nth(props.params.id, pathOr([],['state','profileData','portfolio'], this))}
+                      portfolio={nth(props.match.params.id, pathOr([],['state','profileData','portfolio'], this))}
                     />
                     }
                   } />
 
-              <Match exactly pattern="/portfolioadd"
-                  render={(props) => {
+                <Route exact path="/portfolioadd" render={(props) => {
                     return <PortfolioEdit {...props}
                       addPortfolio={this.addPortfolio}
                       saveData={this.saveData}
@@ -199,33 +190,25 @@ const Root = React.createClass({
                     }
                 } />
 
-
-
-
-
-
-              <Match exactly pattern="/skilledit/:id"
-               render={(props) => {
+              <Route exact path="/skilledit/:id" render={(props) => {
                  return <SkillEdit {...props}
                    updateSkillData={this.updateSkillData}
                    deleteSkill={this.deleteSkill}
                    saveData={this.saveData}
-                   skill={nth(props.params.id, pathOr([],['state','profileData','skills'], this))}
+                   skill={nth(props.match.params.id, pathOr([],['state','profileData','skills'], this))}
                  />
                  }
               } />
 
-              <Match exactly pattern="/skilladd"
-                  render={(props) => {
-                    return <SkillEdit {...props}
+              <Route exact path="/skilladd" render={(props) => {
+                      return <SkillEdit {...props}
                       addSkill={this.addSkill}
                       saveData={this.saveData}
                     />
                     }
                 } />
 
-              <Match exactly pattern="/settings"
-                    render={(props) => {
+              <Route exact path="/settings" render={(props) => {
                       return <Settings {...props}
                         updateEditMode={this.updateEditMode}
                         saveData={this.saveData}
@@ -234,9 +217,8 @@ const Root = React.createClass({
                       }
                 } />
 
-
-
-            <Miss component={NotFound}/>
+              <Route component={NotFound}/>
+            </Switch>
           </div>
         </BrowserRouter>
     )

@@ -1,12 +1,12 @@
 const React = require('react')
 const SkillCard = require('./skillcard')
-const { Link } = require('react-router')
+const { Link } = require('react-router-dom')
 
 const Skills = (props) => {
   const addSkillButton = props.editMode ? <div className="tr pa3">
-      <Link to="/skilladd">{ ({href}) =>
-        <a className="f6 dim br1 no-underline dib v-mid dark-green ba b--green ph3 pv2 mb3 mr2" href={href}>Add Skill</a>
-      }</Link>
+      <Link to="/skilladd">
+        <a className="f6 dim br1 no-underline dib v-mid dark-green ba b--green ph3 pv2 mb3 mr2">Add Skill</a>
+      </Link>
     </div> : null
 
   return (

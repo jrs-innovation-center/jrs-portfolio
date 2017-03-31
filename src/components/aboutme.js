@@ -1,10 +1,10 @@
 const React = require('react')
 const DataImage = require('./dataImage')
-const { Link } = require('react-router')
+const { Link } = require('react-router-dom')
 
 const About = (props) => {
 
-  const EditButton = props.editMode === true ? <Link to='/aboutedit'>{({href}) => <a className='f6 link dim br1 ba ph3 pv2 mb2 dib washed-blue' href={href}>Edit</a>}</Link> : null
+  const EditButton = props.editMode === true ? <Link to='/aboutedit'><a className='f6 link dim br1 ba ph3 pv2 mb2 dib washed-blue'>Edit</a></Link> : null
 
   return (
     <header id='about' className='tc pv4 pv5-ns bg-black'>

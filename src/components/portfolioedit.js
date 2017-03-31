@@ -1,5 +1,5 @@
 const React = require('react')
-const { Redirect, Link } = require('react-router')
+const { Redirect, Link } = require('react-router-dom')
 const { set, lensProp } = require('ramda')
 
 const PortfolioEdit = React.createClass({
@@ -17,9 +17,9 @@ const PortfolioEdit = React.createClass({
 
   handleChange(field) {
     return e => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
-        return this.props.updatePortfolioData(this.props.params.id,
+        return this.props.updatePortfolioData(this.props.match.params.id,
           set(lensProp(field),e.target.value,this.props.portfolio))
       }
       const portfolio = {...this.state.portfolio}
@@ -32,9 +32,9 @@ const PortfolioEdit = React.createClass({
   handleFileChange(e) {
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
-        return this.props.updatePortfolioData(this.props.params.id,
+        return this.props.updatePortfolioData(this.props.match.params.id,
         set(
           lensProp('imgFile'),
           reader.result,
@@ -62,7 +62,7 @@ const PortfolioEdit = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
       return this.props.saveData().then(this.setState({resolved: true}))
     }
@@ -72,17 +72,17 @@ const PortfolioEdit = React.createClass({
 
   handleDelete(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
-      this.props.deletePortfolio(this.props.params.id)
+      this.props.deletePortfolio(this.props.match.params.id)
       this.props.saveData().then(this.setState({resolved: true}))
     }
   },
 
   render() {
     const portfolio = this.props.portfolio ? this.props.portfolio : this.state.portfolio
-    const portfolioLegend = this.props.params.id ? 'Edit Project' : 'Add Project'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Portfolio</button>: null
+    const portfolioLegend = this.props.match.params.id ? 'Edit Project' : 'Add Project'
+    const deleteButton = this.props.match.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Portfolio</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">

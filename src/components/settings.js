@@ -1,5 +1,5 @@
 const React = require('react')
-const { Redirect, Link } = require('react-router')
+const { Redirect, Link } = require('react-router-dom')
 const {  lensPath, view} = require('ramda')
 
 const Settings = React.createClass({
@@ -34,9 +34,9 @@ const Settings = React.createClass({
       {this.state.resolved ? <Redirect to='/' /> : null}
         <form className="measure center" onSubmit={this.handleSubmit}>
           <fieldset id="settings" className="ba b--transparent ph0 mh0">
-          <legend className="f4 fw6 ph0 mh0 mid-gray">Settings</legend>
-          <label>Edit Mode </label>
-          {editModeCheckBox}
+            <legend className="f4 fw6 ph0 mh0 mid-gray">Settings</legend>
+            <label>Edit Mode </label>
+            {editModeCheckBox}
           </fieldset>
           <div className="">
             <input className="b br1 f6 no-underline dim dib v-mid bg-blue white ba b--blue ph3 pv2 mb3 mr2"
