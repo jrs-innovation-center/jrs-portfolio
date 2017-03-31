@@ -1,5 +1,5 @@
 const React = require('react')
-const { Redirect, Link } = require('react-router')
+const { Redirect, Link } = require('react-router-dom')
 const { set, lensProp } = require('ramda')
 
 const ArticleEdit = React.createClass({
@@ -18,7 +18,7 @@ const ArticleEdit = React.createClass({
 
   handleChange(field) {
     return e => {
-      if (this.props.params.id) {
+      if (this.props.amtch.params.id) {
         //edit mode
         return this.props.updateArticleData(this.props.params.id,
           set(lensProp(field),e.target.value,this.props.article))
@@ -82,8 +82,8 @@ const ArticleEdit = React.createClass({
 
   render() {
     const article = this.props.article ? this.props.article : this.state.article
-    const articleLegend = this.props.params.id ? 'Edit Article' : 'Add Article'
-    const deleteButton = this.props.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Article</button>: null
+    const articleLegend = this.props.match.params.id ? 'Edit Article' : 'Add Article'
+    const deleteButton = this.props.match.params.id ? <button className="b f6 br1 no-underline dim dib v-mid white bg-red ba b--red ph3 pv2 mb3 mr2" onClick={this.handleDelete}>Delete Article</button>: null
 
     return (
       <main className="pa4 black-80 bg-near-white">
