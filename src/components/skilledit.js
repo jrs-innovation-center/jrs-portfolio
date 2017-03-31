@@ -19,7 +19,7 @@ const SkillEdit = React.createClass({
     return e => {
       if (this.props.match.params.id) {
         //edit mode
-        return this.props.updateSkillData(this.props.params.id,
+        return this.props.updateSkillData(this.props.match.params.id,
           set(lensProp(field),e.target.value,this.props.skill))
       }
       const skill = {...this.state.skill}
@@ -31,9 +31,9 @@ const SkillEdit = React.createClass({
   handleFileChange(e) {
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
-        return this.props.updateSkillData(this.props.params.id,
+        return this.props.updateSkillData(this.props.match.params.id,
           set(
             lensProp('imgFile'),
             reader.result,
@@ -61,7 +61,7 @@ const SkillEdit = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
       return this.props.saveData().then(this.setState({resolved: true}))
     }
@@ -71,9 +71,9 @@ const SkillEdit = React.createClass({
 
   handleDelete(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
-      this.props.deleteSkill(this.props.params.id)
+      this.props.deleteSkill(this.props.match.params.id)
       this.props.saveData().then(this.setState({resolved: true}))
     }
   },

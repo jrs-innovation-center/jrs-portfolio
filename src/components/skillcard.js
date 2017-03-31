@@ -1,11 +1,11 @@
 const React = require('react')
 const DataImage = require('./dataImage')
-const { Link } = require('react-router')
+const { Link } = require('react-router-dom')
 
 const SkillCard = (props) => {
   const EditButton = props.editMode === true ?
     <Link to={`/skilledit/${props.index}`}>
-      {({href}) => <a className='f6 link dim br1 ba ph3 pv2 mb2 dib black' href={href}>Edit</a>}
+      <a className='f6 link dim br1 ba ph3 pv2 mb2 dib black'>Edit</a>
     </Link> : null
 
   return (

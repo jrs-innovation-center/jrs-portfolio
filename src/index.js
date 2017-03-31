@@ -1,6 +1,8 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const {BrowserRouter, Route, Miss} = require('react-router-dom')
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 const Home = require('./components/home')
 const AboutEdit = require('./components/aboutedit')
 const ArticleEdit = require('./components/articleedit')
@@ -150,93 +152,71 @@ const Root = React.createClass({
       return (
         <BrowserRouter>
           <div>
-          <Route exactly pattern="/"
-            render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
-
-          <Route exactly pattern="/aboutedit"
-            render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
-
-          <Route exactly pattern="/articleedit/:id"
-            render={(props) => {
-              return <ArticleEdit {...props}
-                updateArticleData={this.updateArticleData}
-                deleteArticle={this.deleteArticle}
-                saveData={this.saveData}
-                article={nth(props.match.params.id, pathOr([],['state','profileData','articles'], this))}
-              />
-              }
-            } />
-
-            <Route exactly pattern="/articleadd"
-                render={(props) => {
-                  return <ArticleEdit {...props}
-                    addArticle={this.addArticle}
-                    saveData={this.saveData}
-                  />
-                  }
+             <Switch>
+                <Route exact path="/" render={(props) => <Home {...props} dataLoadingState={this.state.dataLoadingState} profileData={this.state.profileData}/>} />
+                <Route exact path="/aboutedit"
+                     render={(props) => <AboutEdit {...props} updateAboutData={this.updateAboutData} saveData={this.saveData} profileData={this.state.profileData}/>} />
+                <Route exact path="/articleedit/:id" render={(props) => {
+                    return <ArticleEdit {...props}
+                            updateArticleData={this.updateArticleData}
+                            deleteArticle={this.deleteArticle}
+                            saveData={this.saveData}
+                            article={nth(props.match.params.id, pathOr([],['state','profileData','articles'], this))}
+                            />
+                }
               } />
-
-
-
-
-          <Route exactly pattern="/portfolioedit/:id"
-                render={(props) => {
-                  return <PortfolioEdit {...props}
-                    updatePortfolioData={this.updatePortfolioData}
-                    deletePortfolio={this.deletePortfolio}
-                    saveData={this.saveData}
-                    portfolio={nth(props.match.params.id, pathOr([],['state','profileData','portfolio'], this))}
-                  />
-                  }
+                <Route exact path="/articleadd" render={(props) => {
+                        return <ArticleEdit {...props}
+                            addArticle={this.addArticle}
+                            saveData={this.saveData}
+                            />
+                    }
                 } />
 
-            <Route exactly pattern="/portfolioadd"
-                render={(props) => {
-                  return <PortfolioEdit {...props}
-                    addPortfolio={this.addPortfolio}
-                    saveData={this.saveData}
-                  />
-                  }
-              } />
-
-
-
-
-
-
-            <Route exactly pattern="/skilledit/:id"
-             render={(props) => {
-               return <SkillEdit {...props}
-                 updateSkillData={this.updateSkillData}
-                 deleteSkill={this.deleteSkill}
-                 saveData={this.saveData}
-                 skill={nth(props.match.params.id, pathOr([],['state','profileData','skills'], this))}
-               />
-               }
-            } />
-
-            <Route exactly pattern="/skilladd"
-                render={(props) => {
-                  return <SkillEdit {...props}
-                    addSkill={this.addSkill}
-                    saveData={this.saveData}
-                  />
-                  }
-              } />
-
-            <Route exactly pattern="/settings"
-                  render={(props) => {
-                    return <Settings {...props}
-                      updateEditMode={this.updateEditMode}
+                <Route exact path="/portfolioedit/:id" render={(props) => {
+                    return <PortfolioEdit {...props}
+                      updatePortfolioData={this.updatePortfolioData}
+                      deletePortfolio={this.deletePortfolio}
                       saveData={this.saveData}
-                      profileData={this.state.profileData}
+                      portfolio={nth(props.match.params.id, pathOr([],['state','profileData','portfolio'], this))}
                     />
                     }
+                  } />
+
+                <Route exact path="/portfolioadd" render={(props) => {
+                    return <PortfolioEdit {...props}
+                      addPortfolio={this.addPortfolio}
+                      saveData={this.saveData}
+                    />
+                    }
+                } />
+
+              <Route exact path="/skilledit/:id" render={(props) => {
+                 return <SkillEdit {...props}
+                   updateSkillData={this.updateSkillData}
+                   deleteSkill={this.deleteSkill}
+                   saveData={this.saveData}
+                   skill={nth(props.match.params.id, pathOr([],['state','profileData','skills'], this))}
+                 />
+                 }
               } />
 
+              <Route exact path="/skilladd" render={(props) => {
+                      return <SkillEdit {...props}
+                      addSkill={this.addSkill}
 
 
+              <Route exact path="/settings" render={(props) => {
+                      return <Settings {...props}
+                        updateEditMode={this.updateEditMode}
+                        saveData={this.saveData}
+                        profileData={this.state.profileData}
+                      />
+                      }
+                } />
 
+              <Route component={NotFound}/>
+            </Switch>
           </div>
         </BrowserRouter>
       )

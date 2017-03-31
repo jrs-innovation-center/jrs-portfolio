@@ -18,9 +18,10 @@ const ArticleEdit = React.createClass({
 
   handleChange(field) {
     return e => {
-      if (this.props.amtch.params.id) {
+      if (this.props.match.params.id) {
+
         //edit mode
-        return this.props.updateArticleData(this.props.params.id,
+        return this.props.updateArticleData(this.props.match.params.id,
           set(lensProp(field),e.target.value,this.props.article))
       }
       const article = {...this.state.article}
@@ -33,9 +34,9 @@ const ArticleEdit = React.createClass({
   handleFileChange(e) {
     const reader = new window.FileReader()
     reader.addEventListener('load', () => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
-        return this.props.updateArticleData(this.props.params.id,
+        return this.props.updateArticleData(this.props.match.params.id,
         set(
           lensProp('imgFile'),
           reader.result,
@@ -63,7 +64,7 @@ const ArticleEdit = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
       return this.props.saveData().then(this.setState({resolved: true}))
     }
@@ -73,9 +74,9 @@ const ArticleEdit = React.createClass({
 
   handleDelete(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
-      this.props.deleteArticle(this.props.params.id)
+      this.props.deleteArticle(this.props.match.params.id)
       this.props.saveData().then(this.setState({resolved: true}))
     }
   },

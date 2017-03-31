@@ -17,9 +17,9 @@ const PortfolioEdit = React.createClass({
 
   handleChange(field) {
     return e => {
-      if (this.props.params.id) {
+      if (this.props.match.params.id) {
         //edit mode
-        return this.props.updatePortfolioData(this.props.params.id,
+        return this.props.updatePortfolioData(this.props.match.params.id,
           set(lensProp(field),e.target.value,this.props.portfolio))
       }
       const portfolio = {...this.state.portfolio}
@@ -34,7 +34,7 @@ const PortfolioEdit = React.createClass({
     reader.addEventListener('load', () => {
       if (this.props.match.params.id) {
         //edit mode
-        return this.props.updatePortfolioData(this.props.params.id,
+        return this.props.updatePortfolioData(this.props.match.params.id,
         set(
           lensProp('imgFile'),
           reader.result,
@@ -62,7 +62,7 @@ const PortfolioEdit = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
       return this.props.saveData().then(this.setState({resolved: true}))
     }
@@ -72,9 +72,9 @@ const PortfolioEdit = React.createClass({
 
   handleDelete(e) {
     e.preventDefault()
-    if (this.props.params.id) {
+    if (this.props.match.params.id) {
       //this is an edit of an existing skill
-      this.props.deletePortfolio(this.props.params.id)
+      this.props.deletePortfolio(this.props.match.params.id)
       this.props.saveData().then(this.setState({resolved: true}))
     }
   },

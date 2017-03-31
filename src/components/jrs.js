@@ -1,6 +1,6 @@
 const React = require('react')
 const Article = require('./article')
-const { Link } = require('react-router')
+const { Link } = require('react-router-dom')
 
 const JRS = (props) => {
 
