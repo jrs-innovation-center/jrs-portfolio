@@ -1,7 +1,8 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-//const {BrowserRouter, Match, Miss} = require('react-router')
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 const Home = require('./components/home')
 const AboutEdit = require('./components/aboutedit')
 const ArticleEdit = require('./components/articleedit')
@@ -203,10 +204,7 @@ const Root = React.createClass({
               <Route exact path="/skilladd" render={(props) => {
                       return <SkillEdit {...props}
                       addSkill={this.addSkill}
-                      saveData={this.saveData}
-                    />
-                    }
-                } />
+
 
               <Route exact path="/settings" render={(props) => {
                       return <Settings {...props}
@@ -221,7 +219,7 @@ const Root = React.createClass({
             </Switch>
           </div>
         </BrowserRouter>
-    )
+      )
     }
 
 })

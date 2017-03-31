@@ -19,6 +19,7 @@ const ArticleEdit = React.createClass({
   handleChange(field) {
     return e => {
       if (this.props.match.params.id) {
+
         //edit mode
         return this.props.updateArticleData(this.props.match.params.id,
           set(lensProp(field),e.target.value,this.props.article))
